@@ -1,3 +1,5 @@
+== To see the issue involving `@GeneratedValue` a la JPA colliding with REST's PUT semantics
+
 . Run the app
 . In a separate window, `curl -v localhost:8080/employees` and observe existing employees (`/employees/1` and `/employees/2`).
 . Create new entity at id=10 by typing `curl -v -X PUT localhost:8080/employees/10 -H 'Content-Type:application/json' -d '{"name":"Greg","role":"sw dev"}'`
