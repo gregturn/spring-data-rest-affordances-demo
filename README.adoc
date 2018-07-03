@@ -1,0 +1,37 @@
+. Run the app
+. In a separate window, `curl -v localhost:8080/employees` and observe existing employees (`/employees/1` and `/employees/2`).
+. Create new entity at id=10 by typing `curl -v -X PUT localhost:8080/employees/10 -H 'Content-Type:application/json' -d '{"name":"Greg","role":"sw dev"}'`
+. Observe that newly created entity is at `/employees/4` NOT `/employees/10`.
+
+----
+> PUT /employees/10 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.54.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 31
+>
+* upload completely sent off: 31 out of 31 bytes
+< HTTP/1.1 201
+< Location: http://localhost:8080/employees/4
+< Content-Type: application/hal+json;charset=UTF-8
+< Transfer-Encoding: chunked
+< Date: Tue, 03 Jul 2018 22:48:11 GMT
+<
+{
+  "name" : "Greg",
+  "role" : "sw dev",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/employees/4"
+    },
+    "employee" : {
+      "href" : "http://localhost:8080/employees/4{?projection}",
+      "templated" : true
+    },
+    "address" : {
+      "href" : "http://localhost:8080/employees/4/address"
+    }
+  }
+}
+----
